@@ -1,4 +1,4 @@
-<h1>Admin Dashboard</h1>
+<h1>Admin Dashboard for taxdax </h1>
 <a class="item" href="{{ route('logout') }}"
                         onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
@@ -13,3 +13,4 @@
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                         @csrf
                     </form>
+
