@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Web\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class AdminController extends Controller
 {
@@ -12,7 +13,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('backend.index');
+        $totalUsers = User::get()->count();
+        return view('backend.layouts.dashboard.index',compact('totalUsers'));
     }
 
     /**
