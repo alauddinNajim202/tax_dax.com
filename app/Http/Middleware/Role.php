@@ -18,16 +18,14 @@ class Role
      */
     public function handle($request, Closure $next, $role)
     {
-        $userRole = auth()->user()->role;
 
-
-        // Check for client role
-        if ($role === 'client' && $userRole === 'client') {
+        if(auth()->user()->role == 'client'){
             return $next($request);
         }
 
-        // Check for tax_prepare role
-        if ($role === 'tax_prepare' && $userRole === 'tax_prepare') {
+        } else if(auth()->user()->role == 'tax_prepare'){
+            return $next($request);
+        }else if(auth()->user()->role == 'admin'){
             return $next($request);
         }
 
