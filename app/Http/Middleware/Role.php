@@ -11,23 +11,31 @@ class Role
     /**
      * Handle an incoming request.
      *
-     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \Closure  $next
+     * @param  string  $role
+     * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle($request, Closure $next, $role)
     {
+        $userRole = auth()->user()->role;
 
-        if(auth()->user()->role == 'client'){
-            return $next($request);
-
-        } else if(auth()->user()->role == 'tax_prepare'){
-            return $next($request);
-        }else if(auth()->user()->role == 'admin'){
+        // Check for admin role
+        if ($role === 'admin' && $userRole === 'admin') {
             return $next($request);
         }
 
+        // Check for client role
+        if ($role === 'client' && $userRole === 'client') {
+            return $next($request);
+        }
 
+        // Check for tax_prepare role
+        if ($role === 'tax_prepare' && $userRole === 'tax_prepare') {
+            return $next($request);
+        }
 
-        return redirect()->back()->with('error',"You don't have admin access.");
-
+        // If none of the roles match, redirect with an error message
+        return redirect()->back()->with('error', "You don't have the required access.");
     }
 }

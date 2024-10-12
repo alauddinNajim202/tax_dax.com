@@ -49,6 +49,18 @@ class ClientController extends Controller
         return view('user_dashboard.layouts.profile-booking');
     }
 
+    // client profile booking
+
+    public function document_center()
+    {
+        return view('user_dashboard.layouts.document-center');
+    }
+
+
+
+
+
+
     /**
      * Show the form for creating a new resource.
      */
