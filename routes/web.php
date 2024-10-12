@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\Web\backend\AdminController;
-use App\Http\Controllers\Web\front_end\ClientController;
+use App\Http\Controllers\Web\backend\ClientController;
 use App\Http\Controllers\Web\front_end\HomeController;
-use App\Http\Controllers\Web\front_end\TaxPrepareController;
+use App\Http\Controllers\Web\backend\TaxPrepareController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -57,5 +57,6 @@ Route::middleware(['auth', 'role:tax_prepare'])->group(function () {
 
     Route::get('/tax-prepare/dashboard', [TaxPrepareController::class, 'index'])->name('tax_prepare.index');
     Route::get('/tax-prepare/appointment', [TaxPrepareController::class, 'appointment'])->name('tax_prepare.appointment');
+    Route::get('/tax-prepare/profile', [TaxPrepareController::class, 'profile'])->name('tax_prepare.profile');
 
 });

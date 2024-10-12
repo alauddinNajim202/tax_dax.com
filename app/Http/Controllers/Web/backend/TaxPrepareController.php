@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Web\front_end;
+namespace App\Http\Controllers\Web\backend;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -21,6 +21,11 @@ class TaxPrepareController extends Controller
     public function appointment()
     {
         return view('user_dashboard.layouts.bookings');
+    }
+
+    public function profile()
+    {
+        return view('user_dashboard.layouts.profile');
     }
 
 

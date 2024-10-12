@@ -6,6 +6,16 @@
 <script src=" {{ asset('front_end/assets/js/plugins.js') }} "></script>
 <script src=" {{ asset('front_end/assets/js/home-slider.js') }} "></script>
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+<!-- js -->
+
+<script src="{{asset('user_dashboard/assets/js/profile.js')}} "></script>
+
+
+<script>
+   $(document).ready(function () {
+       $('select').niceSelect();
+   });
 <script>
     AOS.init({
         duration: 800,
