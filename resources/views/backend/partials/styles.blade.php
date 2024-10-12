@@ -7,39 +7,39 @@
     href="{{ isset($systemSetting->favicon) && !empty($systemSetting->favicon) ? asset($systemSetting->favicon) : asset('frontend/images/favicon.png') }}" />
 
 {{-- BOOTSTRAP CSS --}}
-<link id="style" href="{{ asset('backend/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+<link id="style" href="{{ asset('backend/assets/plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
 
 {{-- STYLE CSS --}}
-<link href="{{ asset('backend/css/style.css') }}" rel="stylesheet" />
-<link href="{{ asset('backend/css/skin-modes.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/assets/css/style.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/assets/css/skin-modes.css') }}" rel="stylesheet" />
 
 {{-- FONT-ICONS CSS --}}
-<link href="{{ asset('backend/plugins/icons/icons.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/assets/plugins/icons/icons.css') }}" rel="stylesheet" />
 
 {{-- INTERNAL Switcher css --}}
-<link href="{{ asset('backend/switcher/css/switcher.css') }}" rel="stylesheet">
-<link href="{{ asset('backend/switcher/demo.css') }}" rel="stylesheet">
+<link href="{{ asset('backend/assets/switcher/css/switcher.css') }}" rel="stylesheet">
+<link href="{{ asset('backend/assets/switcher/demo.css') }}" rel="stylesheet">
 
 {{-- toaster css --}}
-<link href="{{ asset('backend/css/toastr.css') }}" rel="stylesheet" />
+<link href="{{ asset('backend/assets/css/toastr.css') }}" rel="stylesheet" />
 
 {{-- dropify css --}}
-<link rel="stylesheet" href="{{ asset('backend/css/dropify.min.css') }}">
+<link rel="stylesheet" href="{{ asset('backend/assets/css/dropify.min.css') }}">
 
 {{-- SweetAlert2 CSS --}}
-<link rel="stylesheet" href="{{ asset('backend/custom_downloaded_file/sweetalert2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('backend/assets/custom_downloaded_file/sweetalert2.min.css') }}">
 
 {{-- Lineicons.css --}}
-<link rel="stylesheet" href="{{ asset('backend/css/lineicons.css') }}" />
+<link rel="stylesheet" href="{{ asset('backend/assets/css/lineicons.css') }}" />
 
 {{-- Bootstrap-icons.css --}}
-<link rel="stylesheet" href="{{ asset('backend/css/bootstrap-icons.css') }}" />
+<link rel="stylesheet" href="{{ asset('backend/assets/css/bootstrap-icons.css') }}" />
 
 {{-- toastr start --}}
 <style>
     /* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap'); */
     /* <link rel="stylesheet" href="{{ asset('backend/custom_downloaded_file/css2.css') }}"> */
-    @import url('/public/backend/custom_downloaded_file/css2.css');
+    @import url('/public/backend/assets/custom_downloaded_file/css2.css');
 
 
     #btnSuccess {

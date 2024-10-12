@@ -31,13 +31,6 @@ Route::get('/join-as-prepare', [HomeController::class, 'join_tax_prepare'])->nam
 
 
 
-
-
-
-
-
-
-
 Auth::routes();
 
 

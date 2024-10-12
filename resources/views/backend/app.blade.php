@@ -6,7 +6,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0, user-scalable=0'>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="author" content="bdCalling IT Ltd.">
-    <meta name="keywords" content="pure_water_innovation">
+    <meta name="keywords" content="tax_dax">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title')</title>
@@ -22,7 +22,7 @@
 
     {{-- <LOADER --}}
     <div id="global-loader">
-        <img src="{{ asset('backend/images/loader.svg') }}" class="loader-img" alt="Loader">
+        <img src="{{ asset('backend/assets/images/loader.svg') }}" class="loader-img" alt="Loader">
     </div>
     {{-- LOADER --}}
 

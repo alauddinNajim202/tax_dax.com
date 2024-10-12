@@ -19,7 +19,7 @@ class Role
         if(auth()->user()->role == 'client'){
             return $next($request);
 
-        } else if(auth()->user()->role == 'tax_prepare'){
+        } else if(auth()->user()->role == ' '){
             return $next($request);
         }else if(auth()->user()->role == 'admin'){
             return $next($request);
@@ -31,3 +31,4 @@ class Role
 
     }
 }
+    
