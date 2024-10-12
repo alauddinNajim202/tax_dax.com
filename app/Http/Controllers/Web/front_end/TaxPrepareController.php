@@ -16,6 +16,15 @@ class TaxPrepareController extends Controller
     }
 
     /**
+     * Display a appointment of the resource.
+     */
+    public function appointment()
+    {
+        return view('user_dashboard.layouts.bookings');
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
