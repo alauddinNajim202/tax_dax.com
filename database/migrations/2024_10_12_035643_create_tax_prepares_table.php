@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('tax_prepares', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('user_id')->unsigned()->index();
-            $table->string('name');
-            $table->string('avatar')->nullable();
+            $table->string('full_name');
+            $table->string('profile_photo')->nullable();
             $table->string('business_name');
             $table->string('business_address');
             $table->string('professional_title');
             $table->bigInteger('years_of_experience');
-            $table->string('service_image')->nullable();
+            $table->string('service_photo')->nullable();
             $table->enum('type_rate', ['hourly', 'fixed'])->nullable(); // Add possible values
             $table->string('certification_avatar')->nullable();
             $table->timestamps();
