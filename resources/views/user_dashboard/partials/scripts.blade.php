@@ -80,6 +80,7 @@
 </script>
 
 <script src="{{ asset('user_dashboard/assets/js/jquery-3.7.1.min.js') }}"></script>
+<script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/@easepick/bundle@1.2.0/dist/index.umd.min.js"></script>
 <script src="{{ asset('user_dashboard/assets/js/calender.js') }}"></script>
 <script src="{{ asset('user_dashboard/assets/js/index.js') }}"></script>

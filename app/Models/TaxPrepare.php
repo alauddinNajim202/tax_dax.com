@@ -26,12 +26,15 @@ class TaxPrepare extends Model
         return $this->hasMany(TaxPreparePrice::class);
     }
 
-     // one to many relation with tax_prepare_price
-     public function availibilities()
-     {
-         return $this->hasMany(TaxPrepareAvailability::class);
-     }
+    // one to many relation with tax_prepare_price
+    public function availibilities()
+    {
+        return $this->hasMany(TaxPrepareAvailability::class);
+    }
 
 
-
+    public function certifications()
+    {
+        return $this->hasMany(TaxPrepareCertification::class);
+    }
 }

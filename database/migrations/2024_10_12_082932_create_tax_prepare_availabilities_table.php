@@ -16,8 +16,6 @@ return new class extends Migration
             $table->bigInteger('tax_prepare_id')->unsigned();
             $table->string('from_time');
             $table->string('to_time');
-
-
             $table->timestamps();
             $table->softDeletes();
 

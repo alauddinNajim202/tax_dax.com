@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tax_prepare_prices', function (Blueprint $table) {
+        Schema::create('tax_prepare_certifications', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('tax_prepare_id')->unsigned();
-            $table->string('from_price');
-            $table->string('to_price');
-
-
+            $table->string('certification_file');
             $table->timestamps();
             $table->softDeletes();
 
@@ -30,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('tax_prepare_prices');
+        Schema::dropIfExists('tax_prepare_certifications');
     }
 };

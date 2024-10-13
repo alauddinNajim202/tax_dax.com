@@ -6,7 +6,7 @@
 
         <!-- authenticated tax prepare dashboard -->
         @if (auth()->user()->role == 'tax_prepare')
-            <a href="{{ route('tax_prepare.index') }}" class="item active-item ">
+            <a href="{{ route('tax_prepare.index') }}" class="item {{ request()->routeIs('tax_prepare.index') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26" fill="none">
                     <g clip-path="url(#clip0_8685_3159)">
                         <path
@@ -26,7 +26,7 @@
 
         <!-- authenticated client dashboard -->
         @if (auth()->user()->role == 'client')
-            <a href="{{ route('client.index') }}" class="item active-item ">
+            <a href="{{ route('client.index') }}" class="item {{ request()->routeIs('client.index') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26"
                     fill="none">
                     <g clip-path="url(#clip0_8685_3159)">
@@ -45,7 +45,7 @@
         @endif
 
         @if (auth()->user()->role == 'client')
-            <a href="{{ route('client.bookmarks') }}" class="item">
+            <a href="{{ route('client.bookmarks') }}" class="item {{ request()->routeIs('client.bookmarks') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none">
                     <g clip-path="url(#clip0_8756_4336)">
@@ -65,7 +65,7 @@
 
 
         @if (auth()->user()->role == 'tax_prepare')
-            <a href="{{ route('tax_prepare.appointment') }}" class="item ">
+            <a href="{{ route('tax_prepare.appointment') }}" class="item {{ request()->routeIs('tax_prepare.appointment') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                     fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -78,7 +78,7 @@
 
 
         @if (auth()->user()->role == 'client')
-            <a href="./index.html" class="item ">
+            <a href="./index.html" class="item  ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26"
                     fill="none">
                     <path
@@ -90,7 +90,7 @@
         @endif
 
         @if (auth()->user()->role == 'tax_prepare')
-            <a href="./index.html" class="item ">
+            <a href="./index.html" class="item  ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26"
                     fill="none">
                     <path
@@ -104,7 +104,7 @@
 
 
         @if (auth()->user()->role == 'client')
-            <a href="{{ route('client.booking') }}" class="item active-item">
+            <a href="{{ route('client.booking') }}" class="item {{ request()->routeIs('client.booking') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26"
                     fill="none">
                     <path
@@ -117,7 +117,7 @@
 
 
         @if (auth()->user()->role == 'tax_prepare')
-            <a href="{{ route('tax_prepare.profile') }}" class="item ">
+            <a href="{{ route('tax_prepare.profile.index') }}" class="item {{ request()->routeIs('tax_prepare.profile.index') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="25" height="26" viewBox="0 0 25 26"
                     fill="none">
                     <path
@@ -130,7 +130,7 @@
 
 
         @if (auth()->user()->role == 'client')
-            <a href="{{ route('client.document_center') }}" class="item ">
+            <a href="{{ route('client.document_center') }}" class="item {{ request()->routeIs('client.document_center') ? 'active-item' : '' }} ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="23" viewBox="0 0 19 23"
                     fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"
@@ -145,7 +145,7 @@
         @endif
 
         @if (auth()->user()->role == 'tax_prepare')
-            <a href="#" class="item ">
+            <a href="#" class="item  ">
                 <svg xmlns="http://www.w3.org/2000/svg" width="19" height="23" viewBox="0 0 19 23"
                     fill="none">
                     <path fill-rule="evenodd" clip-rule="evenodd"

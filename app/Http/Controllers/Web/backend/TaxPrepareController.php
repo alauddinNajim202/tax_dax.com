@@ -23,10 +23,10 @@ class TaxPrepareController extends Controller
         return view('user_dashboard.layouts.bookings');
     }
 
-    public function profile()
-    {
-        return view('user_dashboard.layouts.profile');
-    }
+    // public function profile()
+    // {
+    //     return view('user_dashboard.layouts.profile');
+    // }
 
 
     /**
@@ -64,7 +64,7 @@ class TaxPrepareController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request,  $id)
     {
         //
     }

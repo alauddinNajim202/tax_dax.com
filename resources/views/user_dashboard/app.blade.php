@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('user_dashboard/assets/css/plugins/bootstrap.min.css') }}">
     <!-- <link rel="stylesheet" href="./assets/css/common/common.css"> -->
     <link rel="stylesheet" href="{{ asset('user_dashboard/assets/css/dashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.css') }}">
     <link rel="stylesheet" href="{{ asset('user_dashboard/assets/css/calendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('user_dashboard/assets/css/tDashboard.css') }}">
     <link rel="stylesheet" href="{{ asset('user_dashboard/assets/css/common/table.css') }}">
