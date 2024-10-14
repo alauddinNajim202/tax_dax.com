@@ -1,26 +1,46 @@
 @extends('backend.app')
 
-@section('content')
+@section('title', 'Category List')
 
-<div class="content-wrapper">
-    <div class="row">
-        <div class="col-sm-12">
+@section('content')
+    {{-- PAGE-HEADER --}}
+    <div class="page-header">
+        <div>
+            <h1 class="page-title">Dynamic Page</h1>
+        </div>
+        <div class="ms-auto pageheader-btn">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="javascript:void(0);">Settings</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dynamic Page</li>
+            </ol>
+        </div>
+    </div>
+    {{-- PAGE-HEADER --}}
+
+
+    <div class="row row-sm">
+        <div class="col-lg-12">
             <div class="card">
+                <div class="card-header border-bottom"
+                    style="margin-bottom: 0; display: flex; justify-content: space-between;">
+                    <h3 class="card-title">Dynamic Page Table</h3>
+                    <a href="{{ route('category.create') }}" class="btn btn-primary">Add New Page</a>
+                </div>
+
                 <div class="card-body">
-                    <h4 class="card-title">Category</h4>
-                    <div style="display: flex;justify-content: end;"><a
-                            href="{{ route('category.create') }}" class="btn btn-primary">Add Category</a></div>
-                    <div class="table-responsive mt-4 p-4">
-                        <table class="table table-hover" id="data-table">
+                    <div class="table-responsive">
+                        <table class="table table-bordered text-nowrap border-bottom w-100" id="datatable">
                             <thead>
                                 <tr>
-                                    <th>#</th>
-                                    <th>Name</th>
-                                    <th>Actions</th>
+                                    <th class="wd-15p border-bottom-0">#</th>
+                                    <th class="wd-15p border-bottom-0">Name</th>
+
+                                    <th class="wd-20p border-bottom-0">Status</th>
+                                    <th class="wd-15p border-bottom-0">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-
+                                {{-- dynamic data --}}
                             </tbody>
                         </table>
                     </div>
@@ -28,35 +48,26 @@
             </div>
         </div>
     </div>
-</div>
 
-</div>
-
+    
 @endsection
 
-@push('script')
-    {{-- Datatable --}}
-    <script src="{{ asset('backend/assets/js/datatables.min.js') }}"></script>
-    {{-- sweet alart --}}
-    <script src="{{ asset('backend/assets/js/sweetalert2@11.js') }}"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
+@push('scripts')
     <script>
         $(document).ready(function() {
-            var searchable = [];
-            var selectable = [];
+
             $.ajaxSetup({
                 headers: {
                     "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content"),
                 }
             });
-            if (!$.fn.DataTable.isDataTable('#data-table')) {
-                let dTable = $('#data-table').DataTable({
+            if (!$.fn.DataTable.isDataTable('#datatable')) {
+                let dTable = $('#datatable').DataTable({
                     order: [],
                     lengthMenu: [
-                        [25, 50, 100, 200, 500, -1],
-                        [25, 50, 100, 200, 500, "All"]
+                        [10, 25, 50, 100, -1],
+                        [10, 25, 50, 100, "All"]
                     ],
                     processing: true,
                     responsive: true,
@@ -64,10 +75,10 @@
 
                     language: {
                         processing: `<div class="text-center">
-                            <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                          </div>
-                            </div>`
+                        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                        </div>
+                        </div>`
                     },
 
                     scroller: {
@@ -77,7 +88,7 @@
                     dom: "<'row justify-content-between table-topbar'<'col-md-2 col-sm-4 px-0'l><'col-md-2 col-sm-4 px-0'f>>tipr",
                     ajax: {
                         url: "{{ route('category.index') }}",
-                        type: "get",
+                        type: "GET",
                     },
 
                     columns: [{
@@ -92,6 +103,13 @@
                             orderable: true,
                             searchable: true
                         },
+
+                        {
+                            data: 'status',
+                            name: 'status',
+                            orderable: false,
+                            searchable: false
+                        },
                         {
                             data: 'action',
                             name: 'action',
@@ -101,13 +119,54 @@
                     ],
                 });
 
+                dTable.buttons().container().appendTo('#file_exports');
                 new DataTable('#example', {
                     responsive: true
                 });
             }
         });
 
+        // Status Change Confirm Alert
+        function showStatusChangeAlert(id) {
+            event.preventDefault();
 
+            Swal.fire({
+                title: 'Are you sure?',
+                text: 'You want to update the status?',
+                icon: 'info',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    statusChange(id);
+                }
+            });
+        }
+        // Status Change
+        function statusChange(id) {
+            let url = '{{ route('settings.dynamic_page.status', ':id') }}';
+            $.ajax({
+                type: "GET",
+                url: url.replace(':id', id),
+                success: function(resp) {
+                    console.log(resp);
+                    // Reloade DataTable
+                    $('#datatable').DataTable().ajax.reload();
+                    if (resp.success === true) {
+                        // show toast message
+                        toastr.success(resp.message);
+                    } else if (resp.errors) {
+                        toastr.error(resp.errors[0]);
+                    } else {
+                        toastr.error(resp.message);
+                    }
+                },
+                error: function(error) {
+                    // location.reload();
+                }
+            });
+        }
 
         // delete Confirm
         function showDeleteConfirm(id) {
@@ -125,11 +184,12 @@
                     deleteItem(id);
                 }
             });
-        };
+        }
+
         // Delete Button
         function deleteItem(id) {
-            var url = '{{ route('category.destroy', ':id') }}';
-            var csrfToken = '{{ csrf_token() }}';
+            let url = '{{ route('settings.dynamic_page.destroy', ':id') }}';
+            let csrfToken = '{{ csrf_token() }}';
             $.ajax({
                 type: "DELETE",
                 url: url.replace(':id', id),
@@ -137,27 +197,17 @@
                     'X-CSRF-TOKEN': csrfToken
                 },
                 success: function(resp) {
-                    console.log(resp);
-                    // Reloade DataTable
-                    $('#data-table').DataTable().ajax.reload();
-                    if (resp.success === true) {
-                        // show toast message
+                    $('#datatable').DataTable().ajax.reload();
+                    if (resp['t-success']) {
                         toastr.success(resp.message);
-
-                    } else if (resp.errors) {
-                        toastr.error(resp.errors[0]);
                     } else {
                         toastr.error(resp.message);
                     }
-                }, // success end
+                },
                 error: function(error) {
-                    // location.reload();
-                } // Error
-            })
+                    toastr.error('An error occurred. Please try again.');
+                }
+            });
         }
-
-
-
     </script>
 @endpush
-
