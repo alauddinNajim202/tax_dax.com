@@ -17,12 +17,13 @@
     <link rel="stylesheet" href="{{ asset('user_dashboard/assets/css/common/client-common.css') }}">
     <link rel="stylesheet" href="{{asset('user_dashboard/assets/css/common/common.css')}}" />
     <link rel="stylesheet" href="{{asset('user_dashboard/assets/css/categories.css')}}" />
-
     <link rel="stylesheet" href="{{asset('user_dashboard/assets/css/plugins/nice-select.min.css')}} ">
 
      <link rel="stylesheet" href="{{asset('user_dashboard/assets/css/profile.css')}} ">
 
      <link rel="stylesheet" href="{{asset('user_dashboard/assets/css/rate-type.css')}}">
+
+     @stack('style')
 
 
 </head>

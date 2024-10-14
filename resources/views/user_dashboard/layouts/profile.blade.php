@@ -57,34 +57,21 @@
                 <div class="form-item mt-5">
                     <label for="">Upload Profile Photo</label>
 
-                    @if ($tax_prepare->profile_photo)
-                        <div class="upload-profile-photo-container" id="uploadContainer">
-                            <input hidden type="file" name="profile-photo" id="upload-profile-photo-input"
-                                accept="image/*">
-                            <div class="uploaded-profile-photo" id="uploadedPhotoContainer">
-                                <img accept="image/*" width="100%" height="100%"
-                                    class=" rounded uploaded-profile-photo-img" id="uploadedImage"
-                                    src="{{ asset('user_dashboard/tax_prepare/images/' . $tax_prepare->profile_photo) }}"
-                                    alt="Uploaded Profile">
-                                <a class="profile-photo-cross-btn" id="deleteBtn">x</a>
-                            </div>
-                        </div>
-                    @else
-                        <div class="upload-profile-photo-container" id="uploadContainer">
-                            <input hidden type="file" name="profile-photo" id="upload-profile-photo-input"
-                                accept="image/*" value="{{ $tax_prepare->profile_photo }}">
+                    <div class="upload-profile-photo-container" id="uploadContainer">
+                        <input hidden type="file" name="profile-photo" id="upload-profile-photo-input" accept="image/*"
+                            value="{{ $tax_prepare->profile_photo }}">
 
-                            <p class="upload-photo-text" id="uploadText">Upload Profile Photo</p>
+                        <p class="upload-photo-text" id="uploadText">Upload Profile Photo</p>
 
-                            <div class="uploaded-profile-photo" id="uploadedPhotoContainer">
-                                <img accept="image/*" width="100$" height="100" class="uploaded-profile-photo-img"
-                                    id="uploadedImage"
-                                    src="{{ asset('user_dashboard/tax_prepare/images/' . $tax_prepare->profile_photo) }}"
-                                    alt="Uploaded Profile">
-                                <a class="profile-photo-cross-btn" id="deleteBtn">x</a>
-                            </div>
+                        <div class="uploaded-profile-photo" id="uploadedPhotoContainer">
+                            <img accept="image/*" width="100$" height="100" class="uploaded-profile-photo-img"
+                                id="uploadedImage"
+                                src="{{ asset('user_dashboard/tax_prepare/images/' . $tax_prepare->profile_photo) }}"
+                                alt="Uploaded Profile">
+                            <a class="profile-photo-cross-btn" id="deleteBtn">x</a>
                         </div>
-                    @endif
+                    </div>
+
 
 
 
@@ -97,8 +84,7 @@
                 <div class="form-item">
                     <label for="">Business Name</label>
                     <input placeholder="Enter your Business Name" id="business-name"
-                        value="{{ $tax_prepare ? $tax_prepare->business_name : '' }}" name="business-name"
-                        type="text">
+                        value="{{ $tax_prepare ? $tax_prepare->business_name : '' }}" name="business-name" type="text">
                 </div>
                 <div class="form-item">
                     <label for="">Business Address</label>
@@ -206,20 +192,25 @@
                 <div class="service-categories mb-5">
                     <div class="service-categories-btn">
                         <span>Service Categories</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                             <path d="M4 8.5L12 16.5L20 8.5H4Z" fill="#6B6B6B" />
                         </svg>
                     </div>
                     <div class="service-categories-selected-items">
-
+                        @foreach ($service_categories as $category)
+                            @if(in_array($category->id, $selected_categories))
+                                <div id="selected-{{ $category->id }}" class="selected-item">
+                                    <span>{{ $category->name }}</span> <span class="remove-btn">×</span>
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
                     <div class="service-categories-modal">
-                        <div id="1" class="item">Personal Tax Preparation</div>
-                        {{-- <div id="2" class="item">Business Tax Preparation</div>
-                        <div id="3" class="item">IRS Representation</div>
-                        <div id="4" class="item">Estate and Trust Taxes</div>
-                        <div id="5" class="item">Tax Planning and Consulting</div> --}}
+                        @foreach ($service_categories as $category)
+                            <div id="{{ $category->id }}" class="item {{ in_array($category->id, $selected_categories) ? 'active' : '' }}">
+                                {{ $category->name }}
+                            </div>
+                        @endforeach
                     </div>
                 </div>
 
@@ -244,7 +235,8 @@
                 </div>
                 <div style="margin-top: 40px;" class="rate-container ">
                     <input id="rate-type" value="hourly" type="hidden" name="rate-type" />
-                    <div id="hourly" class="rate-box active-rate-box">
+                    <div id="hourly"
+                        class="rate-box {{ $tax_prepare->type_rate == 'hourly' ? 'active-rate-box' : '' }} ">
                         <div class="top">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                                 fill="none">
@@ -265,7 +257,8 @@
                         </div>
                         <div class="rate-title">Hourly Rate</div>
                     </div>
-                    <div id="fixed" class="rate-box">
+                    <div id="fixed"
+                        class="rate-box {{ $tax_prepare->type_rate == 'fixed' ? 'active-rate-box' : '' }}">
                         <div class="top">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"
                                 fill="none">
@@ -289,136 +282,83 @@
                     <div>
                         <label for="">From</label>
                         <div class="price-box">
-                            $<input placeholder="0.000" value type="number" name="from_price" id="" />/hr
+                            $<input placeholder="0.000"
+                                value="{{ $tax_prepare->from_rate ? $tax_prepare->from_rate : '' }}" type="number"
+                                name="from_price" id="" />/hr
                         </div>
                     </div>
                     <div>
                         <label for="">To</label>
                         <div class="price-box">
-                            $<input placeholder="0.000" value type="number" name="to_price" id="" />/hr
+                            $<input placeholder="0.000" value="{{ $tax_prepare->to_rate ? $tax_prepare->to_rate : '' }}"
+                                type="number" name="to_price" id="" />/hr
                         </div>
                     </div>
                 </div>
                 <div class=" mt-5">
                     <label class="form-item-checkbox-title" for="">Set Your Availability</label>
-                    <div class="availability-container mt-3">
-                        <div class="item">
-                            <div class="left">
-                                <input class=" form-check-input" name="day[]" type="checkbox">
-                                <label for="day[]">Sun</label>
-                            </div>
-                            <div class="right">
-                                <div class="unavailable-content">Unavailable</div>
-                                <div class="available-content">
-                                    <select name="from_time[]">
-                                        <option selected disabled value="">From</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                    </select>
-                                    <select name="to_time[]">
-                                        <option selected disabled value="">To</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="left">
-                                <input class=" form-check-input" name="days[]" type="checkbox" checked>
-                                <label for="day[]">Mon</label>
-                            </div>
-                            <div class="right">
-                                <div class="unavailable-content ">Unavailable</div>
-                                <div class="available-content">
-                                    <select name="from_time[]">
-                                        <option selected disabled value="">From</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                    </select>
-                                    <select name="to_time[]">
-                                        <option selected disabled value="">To</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
 
-                        <div class="item">
-                            <div class="left">
-                                <input class=" form-check-input" name="day[]" type="checkbox" checked>
-                                <label for="day[]">Tue</label>
-                            </div>
-                            <div class="right">
-                                <div class="unavailable-content ">Unavailable</div>
-                                <div class="available-content">
-                                    <select name="from_time[]">
-                                        <option selected disabled value="">From</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                    </select>
-                                    <select name="to_time[]">
-                                        <option selected disabled value="">To</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                    </select>
+                    @php
+                        $days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+                        $availabilities = $tax_prepare->availibilities()->get();
+                        // dd($days, $available);
+                    @endphp
+
+                    <div class="availability-container mt-3">
+                        @foreach ($days as $index => $day)
+                            @php
+                                // Check if this day is available
+                                $availability = $availabilities->firstWhere('day', $day);
+                                $is_checked = $availability ? 'checked' : '';
+                                $from_time = $availability ? $availability->from_time : '';
+                                $to_time = $availability ? $availability->to_time : '';
+
+                            @endphp
+
+
+
+                            <div class="item">
+                                <div class="left">
+                                    <input class="form-check-input" name="day[{{ $index }}]" type="checkbox"
+                                        {{ $is_checked }}>
+                                    <label for="day[{{ $index }}]">{{ $day }}</label>
+                                </div>
+                                <div class="right">
+                                    <div class="unavailable-content">Unavailable</div>
+                                    <div class="available-content" style="display: {{ $is_checked ? 'flex' : 'none' }}">
+                                        <select name="from_time[{{ $index }}]">
+                                            <option selected disabled value="">From</option>
+                                            <option value="9" {{ $from_time == '9' ? 'selected' : '' }}>
+                                                9.00 AM
+                                            </option>
+                                            <option value="10" {{ $from_time == '10' ? 'selected' : '' }}>
+                                                10.00 AM
+                                            </option>
+                                            <option value="11" {{ $from_time == '11' ? 'selected' : '' }}>
+                                                11.00 AM
+                                            </option>
+                                        </select>
+                                        <select name="to_time[{{ $index }}]">
+                                            <option selected disabled value="">To</option>
+                                            <option value="5" {{ $to_time == '5' ? 'selected' : '' }}>
+                                                5.00 PM
+                                            </option>
+                                            <option value="6" {{ $to_time == '6' ? 'selected' : '' }}>
+                                                6.00 PM
+                                            </option>
+                                            <option value="7" {{ $to_time == '7' ? 'selected' : '' }}>
+                                                7.00 PM
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="item">
-                            <div class="left">
-                                <input class=" form-check-input" name="day[]" type="checkbox" checked>
-                                <label for="day[]">Wed</label>
-                            </div>
-                            <div class="right">
-                                <div class="unavailable-content ">Unavailable</div>
-                                <div class="available-content">
-                                    <select name="from_time[]">
-                                        <option selected disabled value="">From</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                    </select>
-                                    <select name="to_time[]">
-                                        <option selected disabled value="">To</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="item">
-                            <div class="left">
-                                <input class=" form-check-input" name="day[]" type="checkbox" checked>
-                                <label for="day[]">Sun</label>
-                            </div>
-                            <div class="right">
-                                <div class="unavailable-content ">Unavailable</div>
-                                <div class="available-content">
-                                    <select name="from_time[]">
-                                        <option selected disabled value="">From</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                        <option value="9">9.00 AM</option>
-                                    </select>
-                                    <select name="to_time[]">
-                                        <option selected disabled value="">To</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                        <option value="5">5.00 PM</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
+                        @endforeach
                     </div>
+
+
+
                     <div class="step-form-actions mt-5">
                         <a id="form-step-3-prev-btn" class="prev-btn">Previous Page</a>
                         <a class="next-btn" onclick="tax_prepare_update({{ $tax_prepare->id }});">Save and Next</a>
@@ -432,6 +372,39 @@
 @endsection
 
 @push('scripts')
+    <script>
+        // // select availability
+        const checkboxes = document.querySelectorAll('.form-check-input');
+
+        // Add event listeners to each checkbox
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const parentItem = checkbox.closest('.item'); // Find the parent .item div
+                const availableContent = parentItem.querySelector('.available-content');
+                const unavailableContent = parentItem.querySelector('.unavailable-content');
+
+                if (checkbox.checked) {
+                    // Show available content and hide unavailable content when checked
+                    availableContent.style.display = 'flex';
+                    unavailableContent.style.display = 'none';
+                } else {
+                    // Show unavailable content and hide available content when unchecked
+                    availableContent.style.display = 'none';
+                    unavailableContent.style.display = 'block';
+                }
+            });
+
+            // Trigger initial state based on the checkbox being pre-checked or unchecked
+            checkbox.dispatchEvent(new Event('change'));
+        });
+    </script>
+
+
+    <script>
+        const selected_categories = @json($selected_categories)
+    </script>
+
+
     <script>
         function tax_prepare_update(tax_prepare_id) {
             var full_name = $("#full-name").val();
@@ -497,8 +470,9 @@
                     var day = $(this).find('label').text().trim(); // Get the day
                 }
 
-                var from_time = $(this).find("select[name='from_time[]']").val();
-                var to_time = $(this).find("select[name='to_time[]']").val();
+
+                var from_time = $(this).find("select[name^='from_time']").val();
+                var to_time = $(this).find("select[name^='to_time']").val();
                 console.log(day, from_time, to_time);
 
                 if (day) {
@@ -507,6 +481,7 @@
                     formData.append("to_time[]", to_time);
                 }
             });
+
 
 
             // AJAX request

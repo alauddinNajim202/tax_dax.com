@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\TaxPrepare;
 use App\Models\TaxPrepareAvailability;
 use App\Models\TaxPrepareCertification;
@@ -31,8 +32,11 @@ class TaxPrepareProfileController extends Controller
 
         $tax_prepare = TaxPrepare::where('user_id', $user_id)->first();
 
+        $service_categories = Category::orderBy('name', 'ASC')->get();
+        $selected_categories = $tax_prepare->services()->pluck('category_id')->toArray();
 
-        return view('user_dashboard.layouts.profile', compact('tax_prepare'));
+
+        return view('user_dashboard.layouts.profile', compact('tax_prepare', 'service_categories','selected_categories'));
     }
 
     /**
