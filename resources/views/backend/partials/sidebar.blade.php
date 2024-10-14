@@ -37,6 +37,21 @@
                         <span class="side-menu__label">Dashboard</span>
                     </a>
                 </li>
+
+
+
+                <li class="slide">
+                    <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('category.index') }}">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="side-menu__icon bi bi-info-circle"
+                            fill="currentColor" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16z" />
+                            <path
+                                d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.898.105 1.319.808 1.319.545 0 .956-.252 1.09-.598l.088-.416c.194-.898-.105-1.319-.808-1.319-.545 0-.956.252-1.09.598l-.088.416c-.194.898-.605 1.254-1.308 1.254-.693 0-1.118-.4-.968-1.254l.008-.068.918-4.35c.148-.696-.215-.933-.745-.933H6.865c.516 0 .862.268.968.732z" />
+                            <circle cx="8" cy="4.5" r="1" />
+                        </svg>
+                        <span class="side-menu__label">Category</span>
+                    </a>
+                </li>
  {{--
                 <li class="slide">
                     <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('about-us.index') }}">

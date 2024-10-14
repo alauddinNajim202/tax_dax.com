@@ -7,12 +7,35 @@ use App\Http\Controllers\Web\Backend\Settings\ProfileController;
 use App\Http\Controllers\Web\Backend\Settings\SocialMediaController;
 use App\Http\Controllers\Web\Backend\Settings\StripeSettingsController;
 use App\Http\Controllers\Web\Backend\Settings\SystemSettingsController;
+use App\Http\Controllers\Web\backend\Admin\CategoryController;
 use Illuminate\Support\Facades\Route;
 
 
 
 
 Route::prefix('admin')->group(function () {
+
+
+   //! Route for Category
+   Route::controller(CategoryController::class)->group(function (){
+      Route::get('/category','index')->name('category.index');
+      Route::get('category/create','create')->name('category.create');
+      Route::post('category/store','store')->name('category.store');
+      Route::get('category/edit/{id}','edit')->name('category.edit');
+      Route::patch('category/update/{id}','update')->name('category.update');
+      Route::get('category/status/{id}','status')->name('category.status');
+      Route::delete('category/delete/{id}','destroy')->name('category.destroy');
+   });
+
+
+
+
+
+
+
+
+
+
 
 
     //! Route for Profile Settings
