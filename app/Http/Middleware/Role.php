@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 
 class Role
 {
@@ -18,18 +18,14 @@ class Role
      */
     public function handle($request, Closure $next, $role)
     {
+        $userRole = auth()->user()->role;
 
-        if(auth()->user()->role == 'client'){
+        // Check if the user has the required role
+        if ($userRole === $role || in_array($userRole, ['client', 'tax_prepare', 'admin'])) {
             return $next($request);
         }
 
-        } else if(auth()->user()->role == 'tax_prepare'){
-            return $next($request);
-        }else if(auth()->user()->role == 'admin'){
-            return $next($request);
-        }
-
-        // If none of the roles match, redirect with an error message
+        // If the role doesn't match, redirect back with an error
         return redirect()->back()->with('error', "You don't have the required access.");
     }
 }
