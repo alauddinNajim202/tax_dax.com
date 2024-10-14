@@ -79,11 +79,12 @@ class RegisterController extends Controller
 
     protected function registered(Request $request, $user)
     {
+        // dd($request->all(), auth()->user()->id);
         // Redirect based on user role
         if ($user->role === 'admin') {
             return redirect()->route('admin.dashboard');
         } elseif ($user->role === 'tax_prepare') {
-            return redirect()->route('tax_prepare.index');
+            return redirect()->route('home.start_questions',['user_id' => auth()->user()->id]);
         } else {
             return redirect()->route('client.index');
         }

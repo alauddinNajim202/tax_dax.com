@@ -16,6 +16,9 @@
    $(document).ready(function () {
        $('select').niceSelect();
    });
+</script>
+
+
 <script>
     AOS.init({
         duration: 800,

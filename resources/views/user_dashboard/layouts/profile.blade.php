@@ -192,25 +192,20 @@
                 <div class="service-categories mb-5">
                     <div class="service-categories-btn">
                         <span>Service Categories</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="none">
                             <path d="M4 8.5L12 16.5L20 8.5H4Z" fill="#6B6B6B" />
                         </svg>
                     </div>
                     <div class="service-categories-selected-items">
-                        @foreach ($service_categories as $category)
-                            @if(in_array($category->id, $selected_categories))
-                                <div id="selected-{{ $category->id }}" class="selected-item">
-                                    <span>{{ $category->name }}</span> <span class="remove-btn">×</span>
-                                </div>
-                            @endif
-                        @endforeach
+
                     </div>
                     <div class="service-categories-modal">
+
                         @foreach ($service_categories as $category)
-                            <div id="{{ $category->id }}" class="item {{ in_array($category->id, $selected_categories) ? 'active' : '' }}">
-                                {{ $category->name }}
-                            </div>
+                            <div id="{{$category->id}}" class="item">{{$category->name}} </div>
                         @endforeach
+
                     </div>
                 </div>
 

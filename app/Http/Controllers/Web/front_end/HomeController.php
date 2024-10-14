@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web\front_end;
 
 use App\Http\Controllers\Controller;
+use App\Models\TaxPrepare;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -25,6 +26,15 @@ class HomeController extends Controller
     {
         return view('front_end.layouts.join-as-preparer');
     }
+
+    public function start_questions()
+    {
+        return view('front_end.layouts.start-questions');
+    }
+
+
+
+
 
     /**
      * Show the form for creating a new resource.

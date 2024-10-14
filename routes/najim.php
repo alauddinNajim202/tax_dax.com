@@ -28,6 +28,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/join', [HomeController::class, 'join'])->name('home.join');
 Route::get('/join-as-prepare', [HomeController::class, 'join_tax_prepare'])->name('home.prepare');
+Route::get('/start-questions', [HomeController::class, 'start_questions'])->name('home.start_questions');
 
 
 
@@ -64,6 +65,10 @@ Route::middleware(['auth', 'role:tax_prepare'])->group(function () {
 
     Route::get('/tax-prepare/profile-setup', [TaxPrepareProfileController::class, 'index'])->name('tax_prepare.profile.index');
     Route::get('/tax-prepare/profile', [TaxPrepareProfileController::class, 'profile'])->name('tax_prepare.profile.profile');
+    Route::get('/tax-prepare-stepform', [TaxPrepareProfileController::class, 'tax_prepare_stepform'])->name('tax_prepare.tax_prepare_stepform');
+
+    Route::post('/tax-prepare/store', [TaxPrepareProfileController::class, 'store'])->name('tax_prepare.store');
+
     Route::post('/tax-prepare/profile/update', [TaxPrepareProfileController::class, 'update'])->name('tax_prepare.profile.update');
 
 });

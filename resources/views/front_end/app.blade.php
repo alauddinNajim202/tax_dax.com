@@ -13,9 +13,11 @@
 
     <!-- css plugins files -->
     <link rel="stylesheet" href=" {{ asset('front_end/assets/css/plugins/bootstrap.min.css') }} " />
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/toastr.css') }}">
+
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- css files -->
-    <link rel="stylesheet" href="{{asset('front_end/assets/css/plugins/fontawesome.min.css')}} " />
+    <link rel="stylesheet" href="{{ asset('front_end/assets/css/plugins/fontawesome.min.css') }} " />
     <link rel="stylesheet" href=" {{ asset('front_end/assets/css/common/common.css') }} " />
     <link rel="stylesheet" href=" {{ asset('front_end/assets/css/home.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front_end/assets/css/categories.css') }} ">
@@ -23,6 +25,9 @@
     <link rel="stylesheet" href=" {{ asset('front_end/assets/css/join-as-preparer.css') }} " />
 
 
+    <link rel="stylesheet" href="{{asset('front_end/assets/css/plugins/nice-select.min.css')}} " />
+
+    <link rel="stylesheet" href="{{asset('front_end/assets/css/tex-preparer-step-form.css')}} " />
 
 
 

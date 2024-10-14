@@ -6,7 +6,7 @@
                     d="M0 96C0 78.3 14.3 64 32 64l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32l384 0c17.7 0 32 14.3 32 32s-14.3 32-32 32L32 288c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32L32 448c-17.7 0-32-14.3-32-32s14.3-32 32-32l384 0c17.7 0 32 14.3 32 32z" />
             </svg>
         </div>
-        <a href="{{route('home')}}" class="logo">
+        <a href="{{ route('home') }}" class="logo">
             <img src="{{ asset('front_end/assets/images/logo.png') }}" alt="logo" />
         </a>
         <!-- search bar start -->
@@ -237,8 +237,22 @@
             </div>
         </div>
         <div class="profile-container">
-            <img id="user-account-profile-btn" src="{{ asset('user_dashboard/assets/images/user.png') }}"
-                alt="" />
+
+            {{-- @php
+                $user_id = auth()->user()->id;
+
+                $tax_prepare = App\Models\TaxPrepare::where('user_id', $user_id)->first();
+                // dd($tax_prepare->profile_photo);
+            @endphp
+
+            @if ($tax_prepare->profile_photo)
+                <img id="user-account-profile-btn" src="{{ asset('user_dashboard/tax_prepare/images/'.$tax_prepare->profile_photo) }}"
+                    alt="" />
+            @else --}}
+                <img id="user-account-profile-btn" src="{{ asset('user_dashboard/assets/images/user.png') }}"
+                    alt="" />
+            {{-- @endif --}}
+
 
             <!-- profile modal start -->
             <div id="user-account-modal">

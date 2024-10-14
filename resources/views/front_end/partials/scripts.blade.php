@@ -1,5 +1,6 @@
 <!-- js -->
 <script src=" {{ asset('front_end/assets/js/jquery-3.7.1.min.js') }} "></script>
+<script src="{{ asset('backend/assets/js/toastr.min.js') }}"></script>
 <script src=" {{ asset('front_end/assets/js/index.js') }} "></script>
 
 <script src=" {{ asset('front_end/assets/js/plugins.js') }} "></script>

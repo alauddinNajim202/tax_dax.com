@@ -86,7 +86,7 @@
                 <div class="tm-create-btn-link-wrapper">
                     <button type="submit">Create Account</button>
                     <p class="tm-create-btn-link">
-                        Already have an account? <a href="sign-in.html">Sign In</a>
+                        Already have an account? <a href="{{route('login')}}">Sign In</a>
                     </p>
                 </div>
             </form>
