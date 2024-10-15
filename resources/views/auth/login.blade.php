@@ -35,7 +35,7 @@
                             <div class="or-line"></div>
                         </div>
                         <a class="google-link" href="#">
-                            <img src="assets/images/google.png" alt="" srcset="">
+                            <img src=" {{asset('front_end/assets/images/google.png')}} " alt="" srcset="">
                             Continue with Google</a>
                     </form>
 
